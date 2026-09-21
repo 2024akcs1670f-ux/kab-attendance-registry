@@ -59,19 +59,19 @@ def mark_absentees(day=None):
     return flagged
 
 
-# def status_by_day(data, student_id):
-#     """Map date -> status for one student. Missing days count as Absent."""
-#     recorded = {r["date"]: r["status"] for r in data["records"]
-#                 if r["student_id"] == student_id}
-#     return {d: recorded.get(d, "Absent") for d in school_days(data)}
+def status_by_day(data, student_id):
+    """Map date -> status for one student. Missing days count as Absent."""
+    recorded = {r["date"]: r["status"] for r in data["records"]
+                if r["student_id"] == student_id}
+    return {d: recorded.get(d, "Absent") for d in school_days(data)}
 
 
-# def attendance_rate(data, student_id):
-#     days = status_by_day(data, student_id)
-#     if not days:
-#         return 100.0
-#     attended = sum(1 for s in days.values() if s in ATTENDED)
-#     return round(attended / len(days) * 100, 1)
+def attendance_rate(data, student_id):
+    days = status_by_day(data, student_id)
+    if not days:
+        return 100.0
+    attended = sum(1 for s in days.values() if s in ATTENDED)
+    return round(attended / len(days) * 100, 1)
 
 
 # def absence_streaks(data, student_id):
