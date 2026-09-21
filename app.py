@@ -1,25 +1,29 @@
-
-from reporting import (mark_absentees, print_chronic_report,
-                       run_mark_absentees, run_student_rate)
+from roster import create_student, check_in, list_today
 
 def main():
     while True:
-        print("\n=== KAB Attendance Registry ===")
-        print("4. Mark absentees")
-        print("5. Chronic absence report")
-        print("6. Student attendance rate and streaks")
-        print("0. Exit")
-        choice = input("Choose: ").strip()
-        if choice == "4":
-            run_mark_absentees()
-        elif choice == "5":
-            print_chronic_report()
-        elif choice == "6":
-            run_student_rate()
-        elif choice == "0":
+        print("\n=== KAB Attendance ===")
+        print("1. Create student")
+        print("2. Check-in (Present/Late)")
+        print("3. List today's check-ins")
+        print("4. Exit")
+        choice = input("Choose: ")
+
+        if choice == "1":
+            name = input("Name: ")
+            sid = input("Student ID: ")
+            create_student(name, sid)
+        elif choice == "2":
+            sid = input("Student ID: ")
+            status = input("Status (Present/Late): ")
+            check_in(sid, status)
+        elif choice == "3":
+            list_today()
+        elif choice == "4":
+            print("Bye")
             break
         else:
-            print("Invalid option.")
+            print("Invalid choice")
 
 if __name__ == "__main__":
     main()
