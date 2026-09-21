@@ -74,16 +74,16 @@ def attendance_rate(data, student_id):
     return round(attended / len(days) * 100, 1)
 
 
-# def absence_streaks(data, student_id):
-#     """Return (longest streak, current streak) of consecutive absent school days."""
-#     longest = current = 0
-#     for d, status in sorted(status_by_day(data, student_id).items()):
-#         if status == "Absent":
-#             current += 1
-#             longest = max(longest, current)
-#         else:
-#             current = 0
-#     return longest, current
+def absence_streaks(data, student_id):
+    """Return (longest streak, current streak) of consecutive absent school days."""
+    longest = current = 0
+    for d, status in sorted(status_by_day(data, student_id).items()):
+        if status == "Absent":
+            current += 1
+            longest = max(longest, current)
+        else:
+            current = 0
+    return longest, current
 
 
 # def chronic_absentees(data=None, threshold=THRESHOLD):
