@@ -34,29 +34,29 @@ def save_log(data):
         json.dump(data, f, indent=2)
 
 
-# def school_days(data):
-#     """Every date that has at least one record counts as a school day."""
-#     return sorted({r["date"] for r in data["records"]})
+def school_days(data):
+    """Every date that has at least one record counts as a school day."""
+    return sorted({r["date"] for r in data["records"]})
 
 
-# def mark_absentees(day=None):
-#     """Flag every registered student with no record on `day` as Absent.
-#     Returns the list of students newly marked absent."""
-#     day = day or date.today().isoformat()
-#     data = load_log()
-#     seen = {r["student_id"] for r in data["records"] if r["date"] == day}
-#     flagged = []
-#     for s in data["students"]:
-#         if s["student_id"] not in seen:
-#             data["records"].append({
-#                 "student_id": s["student_id"],
-#                 "date": day,
-#                 "status": "Absent",
-#                 "timestamp": datetime.now().isoformat(timespec="seconds"),
-#             })
-#             flagged.append(s)
-#     save_log(data)
-#     return flagged
+def mark_absentees(day=None):
+    """Flag every registered student with no record on `day` as Absent.
+    Returns the list of students newly marked absent."""
+    day = day or date.today().isoformat()
+    data = load_log()
+    seen = {r["student_id"] for r in data["records"] if r["date"] == day}
+    flagged = []
+    for s in data["students"]:
+        if s["student_id"] not in seen:
+            data["records"].append({
+                "student_id": s["student_id"],
+                "date": day,
+                "status": "Absent",
+                "timestamp": datetime.now().isoformat(timespec="seconds"),
+            })
+            flagged.append(s)
+    save_log(data)
+    return flagged
 
 
 # def status_by_day(data, student_id):
