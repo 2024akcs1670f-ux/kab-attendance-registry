@@ -112,27 +112,27 @@ def print_chronic_report():
               f"{r['longest']:>12}{r['current']:>6}")
 
 
-# def run_mark_absentees():
-#     day = input("Date (YYYY-MM-DD, blank for today): ").strip() or None
-#     try:
-#         if day:
-#             datetime.strptime(day, "%Y-%m-%d")
-#     except ValueError:
-#         print("Invalid date format.")
-#         return
-#     flagged = mark_absentees(day)
-#     if not flagged:
-#         print("Nobody to flag, everyone already has a record.")
-#     for s in flagged:
-#         print(f"Marked absent: {s['student_id']} {s['name']}")
+def run_mark_absentees():
+    day = input("Date (YYYY-MM-DD, blank for today): ").strip() or None
+    try:
+        if day:
+            datetime.strptime(day, "%Y-%m-%d")
+    except ValueError:
+        print("Invalid date format.")
+        return
+    flagged = mark_absentees(day)
+    if not flagged:
+        print("Nobody to flag, everyone already has a record.")
+    for s in flagged:
+        print(f"Marked absent: {s['student_id']} {s['name']}")
 
 
-# def run_student_rate():
-#     sid = input("Student ID: ").strip()
-#     data = load_log()
-#     if not any(s["student_id"] == sid for s in data["students"]):
-#         print("Student not found.")
-#         return
-#     longest, current = absence_streaks(data, sid)
-#     print(f"Attendance rate: {attendance_rate(data, sid)}%")
-#     print(f"Longest absence streak: {longest} day(s), current: {current}")
+def run_student_rate():
+    sid = input("Student ID: ").strip()
+    data = load_log()
+    if not any(s["student_id"] == sid for s in data["students"]):
+        print("Student not found.")
+        return
+    longest, current = absence_streaks(data, sid)
+    print(f"Attendance rate: {attendance_rate(data, sid)}%")
+    print(f"Longest absence streak: {longest} day(s), current: {current}")
