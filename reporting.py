@@ -86,30 +86,30 @@ def absence_streaks(data, student_id):
     return longest, current
 
 
-# def chronic_absentees(data=None, threshold=THRESHOLD):
-#     data = data or load_log()
-#     result = []
-#     for s in data["students"]:
-#         rate = attendance_rate(data, s["student_id"])
-#         if rate < threshold:
-#             longest, current = absence_streaks(data, s["student_id"])
-#             result.append({**s, "rate": rate, "longest": longest, "current": current})
-#     return sorted(result, key=lambda x: x["rate"])
+def chronic_absentees(data=None, threshold=THRESHOLD):
+    data = data or load_log()
+    result = []
+    for s in data["students"]:
+        rate = attendance_rate(data, s["student_id"])
+        if rate < threshold:
+            longest, current = absence_streaks(data, s["student_id"])
+            result.append({**s, "rate": rate, "longest": longest, "current": current})
+    return sorted(result, key=lambda x: x["rate"])
 
 
-# def print_chronic_report():
-#     data = load_log()
-#     days = len(school_days(data))
-#     rows = chronic_absentees(data)
-#     print(f"\n=== Chronic Absence Report (below {THRESHOLD:.0f}%) ===")
-#     print(f"School days on record: {days}")
-#     if not rows:
-#         print("No chronically absent students.")
-#         return
-#     print(f"{'ID':<10}{'Name':<22}{'Rate':>7}{'Max streak':>12}{'Now':>6}")
-#     for r in rows:
-#         print(f"{r['student_id']:<10}{r['name']:<22}{r['rate']:>6}%"
-#               f"{r['longest']:>12}{r['current']:>6}")
+def print_chronic_report():
+    data = load_log()
+    days = len(school_days(data))
+    rows = chronic_absentees(data)
+    print(f"\n=== Chronic Absence Report (below {THRESHOLD:.0f}%) ===")
+    print(f"School days on record: {days}")
+    if not rows:
+        print("No chronically absent students.")
+        return
+    print(f"{'ID':<10}{'Name':<22}{'Rate':>7}{'Max streak':>12}{'Now':>6}")
+    for r in rows:
+        print(f"{r['student_id']:<10}{r['name']:<22}{r['rate']:>6}%"
+              f"{r['longest']:>12}{r['current']:>6}")
 
 
 # def run_mark_absentees():
